@@ -19,799 +19,834 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --primary-color: #00aaff;
-            --secondary-color: #0a192f;
-            --light-secondary-color: #112240;
-            --text-color: #ccd6f6;
-            --light-text-color: #8892b0;
-            --border-radius: 8px;
-            --white-bg: #FFFFFF; /* Pure white */
-            --light-grey-bg: #F8F9FA; /* Slightly darker than white */
-            --dark-section-text-color: #333333; /* Darker text for white backgrounds */
-            --dark-section-subtitle-color: #555555; /* Darker subtitle for white backgrounds */
-        }
 
-        html {
-            scroll-behavior: smooth;
-        }
 
-        body {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
+<style>
+    :root {
+        --primary-color: #00aaff;
+        --secondary-color: #0a192f;
+        --light-secondary-color: #112240;
+        --text-color: #ccd6f6;
+        --light-text-color: #8892b0;
+        --border-radius: 8px;
+        --white-bg: #FFFFFF; /* Pure white */
+        --light-grey-bg: #F8F9FA; /* Slightly darker than white */
+        --dark-section-text-color: #333333; /* Darker text for white backgrounds */
+        --dark-section-subtitle-color: #555555; /* Darker subtitle for white backgrounds */
+    }
 
-        /* --- Navigation Bar --- */
-        .navbar {
-            background-color: transparent; /* Transparent by default */
-            transition: background-color 0.3s ease;
-            z-index: 1060; /* Higher than carousel content */
-        }
+    html {
+        scroll-behavior: smooth;
+        /* Crucial: Prevent horizontal scroll across the entire page */
+        overflow-x: hidden;
+    }
 
-        .navbar.scrolled {
-            background-color: rgba(10, 25, 47, 0.95); /* Deep blue background on scroll */
-            backdrop-filter: blur(10px); /* Add blur on scroll */
+    body {
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        font-family: 'Poppins', sans-serif;
+        /* Ensure no extra padding/margin on body itself */
+        margin: 0;
+        padding: 0;
+        /* Crucial: Prevent horizontal scroll from content outside body boundaries */
+        overflow-x: hidden;
+        width: 100%; /* Ensure body takes exactly 100% of viewport width */
+    }
+
+    /* --- Navigation Bar --- */
+    .navbar {
+        background-color: transparent; /* Transparent by default */
+        transition: background-color 0.3s ease;
+        z-index: 1060; /* Higher than carousel content */
+    }
+
+    .navbar.scrolled {
+        background-color: rgba(10, 25, 47, 0.95); /* Deep blue background on scroll */
+        backdrop-filter: blur(10px); /* Add blur on scroll */
+    }
+
+    .navbar-brand {
+        font-weight: 700;
+        color: #ffffff !important; /* Logo is now white */
+    }
+    
+    /* Desktop Nav Link Hover */
+    .nav-link {
+        color: var(--text-color) !important;
+        font-weight: 400;
+        position: relative;
+        padding: 0.5rem 0; /* Adjusted padding for border effect */
+        margin: 0 1rem; /* Add horizontal margin between links */
+        transition: color 0.3s ease-in-out;
+    }
+
+    /* REMOVED: .nav-link::before for the border hover effect */
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary-color) !important; /* Only text color change on hover/active */
+    }
+
+    /* Navbar Toggler Icon */
+    .navbar-toggler {
+        border: none;
+        z-index: 1070; /* Even higher to make sure it's on top */
+        width: 40px; /* Fixed width */
+        height: 40px; /* Fixed height */
+        position: relative; /* For absolute positioning of icons */
+        display: flex; /* To center the icons */
+        align-items: center;
+        justify-content: center;
+    }
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+        background-image: var(--bs-navbar-toggler-icon-bg); /* Default Bootstrap burger icon */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .navbar-toggler .close-icon {
+        display: none; /* Hidden by default */
+        font-size: 1.5rem; /* Size for the X icon */
+        color: var(--primary-color); /* Color for the X icon */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(90deg); /* Rotate out the burger */
+        pointer-events: none; /* Disable interaction with hidden icon */
+    }
+
+    .navbar-toggler[aria-expanded="true"] .close-icon {
+        display: block; /* Show the close icon */
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg); /* Ensure it's not rotated */
+    }
+
+    /* General Button Styling & Animations */
+    .btn {
+        padding: 0.75rem 2rem;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle initial shadow */
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-primary:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+        transform: translateY(-2px); /* Lift effect */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
+    }
+
+    .btn-primary:active {
+        transform: translateY(0); /* Press down effect */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Reduced shadow on click */
+    }
+
+    .btn-cta {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+    }
+
+    .btn-cta:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        transform: translateY(-2px); /* Lift effect */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
+    }
+
+    .btn-cta:active {
+        transform: translateY(0); /* Press down effect */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Reduced shadow on click */
+    }
+
+    /* --- Custom Mobile Navbar (REVISED FOR WIDER RIGHT-SIDE SLIDE & HOVER) --- */
+    @media (max-width: 991.98px) {
+        /* Main Navbar Container Adjustments */
+        .navbar .container {
+            justify-content: space-between; /* Push logo left and toggler right */
+            align-items: center; /* Vertically align items */
+            padding: 0 15px; /* Add padding to contain elements */
+            width: 100%; /* Ensure container takes full width */
+            flex-wrap: nowrap; /* Prevent wrapping */
+            overflow-x: hidden; /* Important for containing elements within the navbar itself */
         }
 
         .navbar-brand {
-            font-weight: 700;
-            color: #ffffff !important; /* Logo is now white */
-        }
-        
-        /* Desktop Nav Link Hover */
-        .nav-link {
-            color: var(--text-color) !important;
-            font-weight: 400;
-            position: relative;
-            padding: 0.5rem 0; /* Adjusted padding for border effect */
-            margin: 0 1rem; /* Add horizontal margin between links */
-            transition: color 0.3s ease-in-out;
+            margin-right: 0 !important;
+            font-size: 1.5rem; /* Consistent mobile logo size */
+            flex-shrink: 0; /* Prevent the logo from shrinking */
         }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: -5px; /* Position the border below the text */
-            left: 50%; /* Start from the middle */
-            width: 0; /* Initially no width */
-            height: 2px; /* Thickness of the border */
-            background-color: var(--primary-color);
-            transform: translateX(-50%); /* Center the border */
-            transition: width 0.3s ease-in-out; /* Animate the width */
-            z-index: 1; /* Ensure it's above other elements if needed */
-        }
-
-        .nav-link:hover::before, .nav-link.active::before {
-            width: 100%; /* Expand to full width on hover/active */
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary-color) !important; /* Change text color on hover/active */
-        }
-
-        /* Navbar Toggler Icon */
         .navbar-toggler {
-            border: none;
-            z-index: 1070; /* Even higher to make sure it's on top */
-            width: 40px; /* Fixed width */
-            height: 40px; /* Fixed height */
-            position: relative; /* For absolute positioning of icons */
-            display: flex; /* To center the icons */
-            align-items: center;
-            justify-content: center;
-        }
-        .navbar-toggler:focus {
-            box-shadow: none;
+            margin-left: 0 !important;
+            flex-shrink: 0; /* Prevent the toggler from shrinking */
+            width: 40px; /* Keep fixed width for consistent icon centering */
+            height: 40px; /* Keep fixed height for consistent icon centering */
         }
 
-        .navbar-toggler-icon {
-            background-image: var(--bs-navbar-toggler-icon-bg); /* Default Bootstrap burger icon */
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .navbar-toggler .close-icon {
-            display: none; /* Hidden by default */
-            font-size: 1.5rem; /* Size for the X icon */
-            color: var(--primary-color); /* Color for the X icon */
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-            opacity: 0;
-            transform: translate(-50%, -50%) rotate(90deg); /* Rotate out the burger */
-            pointer-events: none; /* Disable interaction with hidden icon */
-        }
-
-        .navbar-toggler[aria-expanded="true"] .close-icon {
-            display: block; /* Show the close icon */
-            opacity: 1;
-            transform: translate(-50%, -50%) rotate(0deg); /* Ensure it's not rotated */
-        }
-
-        /* General Button Styling & Animations */
-        .btn {
-            padding: 0.75rem 2rem;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle initial shadow */
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-            transform: translateY(-2px); /* Lift effect */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
-        }
-
-        .btn-primary:active {
-            transform: translateY(0); /* Press down effect */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Reduced shadow on click */
-        }
-
-        .btn-cta {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .btn-cta:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            transform: translateY(-2px); /* Lift effect */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Enhanced shadow on hover */
-        }
-
-        .btn-cta:active {
-            transform: translateY(0); /* Press down effect */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Reduced shadow on click */
-        }
-
-        /* --- Custom Mobile Navbar --- */
-        @media (max-width: 991.98px) {
-            .navbar .container {
-                justify-content: space-between; /* Space between logo and toggler */
-            }
-            .navbar-brand {
-                margin-right: 0 !important; /* Remove specific right margin for mobile */
-             
-            }
-            .navbar-toggler {
-                margin-left: auto !important; /* Pushes toggler to the right */
-            }
-            .navbar-collapse {
-                position: fixed;
-                top: 0;
-                right: 0; /* Slide from right */
-                height: 100vh; /* Full height */
-                width: 100%; /* Full width */
-                max-width: 320px; /* Max width for the menu itself */
-                /* Mobile Navbar: Deep blue background */
-                background-color: rgba(10, 25, 47, 0.95); /* Deep blue, slightly transparent */
-                backdrop-filter: blur(5px); /* Optional: add a slight blur for depth */
-                z-index: 1055; /* Slightly lower than navbar but above overlay */
-                transform: translateX(100%); /* Start off-screen3 to the right */
-                transition: transform 0.3s ease-in-out;
-                padding: 2rem;
-                display: block !important;
-                border-left: 1px solid var(--primary-color); /* Border on left side now */
-            }
-            .navbar-collapse.show {
-                transform: translateX(calc(100% - 320px)); /* Adjust for max-width to reveal the menu */
-                box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            }
-             @media (max-width: 320px) { /* For very small screens, make it truly full width */
-                .navbar-collapse.show {
-                    transform: translateX(0);
-                }
-            }
-            .navbar-nav {
-                align-items: flex-start;
-            }
-            .nav-item {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            /* Mobile Nav Link Hover/Active */
-            .nav-link {
-                margin: 0; /* Remove horizontal margin for full-width links */
-                padding: 0.75rem 1rem; /* Adjust padding for block links */
-                text-align: left; /* Align text to the left */
-                width: 100%; /* Take full width of the mobile menu */
-                transition: color 0.3s ease; /* Only color transition for mobile */
-                color: var(--text-color) !important; /* Light text for deep blue mobile background */
-            }
-            .nav-link:hover, .nav-link.active {
-                color: var(--primary-color) !important; /* Primary color on hover/active */
-            }
-
-
-            .nav-link::before {
-                display: none; /* Remove desktop border animation for mobile */
-            }
-
-            .about-img {
-                max-height: 350px;
-                width: 100%;
-                object-fit: cover;
-                object-position: center;
-            }
-
-            /* Mobile Navbar Logo (inside the collapsable menu for reference) */
-            .navbar-brand-mobile {
-                font-weight: 700;
-                color: #ffffff !important;
-                font-size: 1.5rem; /* Match desktop logo size */
-                text-decoration: none;
-                display: none;
-                padding: 1rem 0;
-            }
-        }
-
-        .navbar-overlay {
+        /* Off-Canvas Mobile Menu (navbar-collapse) */
+        .navbar-collapse {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1050; 
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .navbar-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-
-        /* --- Hero Section with Carousel and Globe --- */
-        #hero {
-            position: relative;
+            right: 0; /* Anchored to the RIGHT side of the viewport */
+            width: 100%; /* Take full width by default */
+            max-width: 70vw; /* **Make it cover more than half the screen (70% of viewport width)** */
             height: 100vh;
-            overflow: hidden;
-            background-color: var(--secondary-color); 
-        }
-
-        #globe-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Behind carousel content */
-            overflow: hidden;
-        }
-
-        #globe-container canvas {
-            display: block;
-        }
-
-        /* Carousel setup for correct layering */
-        #hero .carousel-inner {
-            position: absolute; /* Take carousel out of flow, layer on top of globe */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Above the globe */
-        }
-
-        /* Custom "zoom-out-fade" animation for carousel slides */
-        .carousel-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out; 
-            z-index: 1;
-            display: block !important; 
-            transform: scale(0.9); /* Start slightly zoomed out */
-        }
-
-        .carousel-item.active {
-            opacity: 1;
-            transform: scale(1); /* Zoom to normal size */
-            z-index: 2;
-        }
-
-        /* When an item leaves (goes inactive) */
-        .carousel-item-next:not(.carousel-item-start),
-        .carousel-item-prev:not(.carousel-item-end),
-        .carousel-item.active.carousel-item-start,
-        .carousel-item.active.carousel-item-end {
-            /* These states are for Bootstrap's default slide. We override them. */
-            transform: scale(1); /* Ensure active item doesn't get transformed by Bootstrap */
-        }
-
-        /* For the incoming slide, make it start slightly zoomed out and hidden */
-        .carousel-item-next, .carousel-item-prev {
-            transform: scale(0.9);
-            opacity: 0;
-        }
-
-        /* Reset for the currently active item when it's about to become inactive */
-        .carousel-item.active {
-            transform: scale(1);
-            opacity: 1;
-        }
-        
-        /* When an active item starts its exit animation (becomes .carousel-item-start or .carousel-item-end) */
-        .carousel-item.active.carousel-item-start,
-        .carousel-item.active.carousel-item-end {
-            transform: scale(0.9); /* Zoom out */
-            opacity: 0;
-            z-index: 1; /* Move behind incoming slide */
-        }
-        /* End custom "zoom-out-fade" animation */
-
-
-        .carousel-caption {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.048); /* Overlay for readability */
-            display: flex;
-            align-items: center; /* Vertically center */
-            justify-content: center; /* Horizontally center */
-            text-align: center;
+            background-color: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(8px);
+            z-index: 1055;
+            /* Start completely off-screen to the right by its full max-width */
+            transform: translateX(70vw); /* **Adjust this value to match max-width and slide from right** */
+            transition: transform 0.4s ease-in-out;
             padding: 2rem;
-            width: 100%; /* Ensure it spans full width */
-            height: 100%; /* Ensure it spans full height */
-        }
-
-        .hero-content {
-            position: relative;
-            padding: 2rem;
-            color: #fff; /* Text color */
-            max-width: 900px; /* Limit width for better readability */
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
-        }
-
-        .hero-content p {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            color: var(--light-text-color);
-            max-width: 700px;
-            margin: 1rem auto;
-        }
-
-        /* Carousel Indicators as Dots */
-        .carousel-indicators [data-bs-target] {
-            width: 10px; /* Width for dots */
-            height: 10px; /* Height for dots */
-            border-radius: 50%; /* Make them perfectly round */
-            background-color: rgba(255, 255, 255, 0.7); /* Lighter background for inactive dots */
-            border: none; /* Remove border */
-            opacity: 0.7; /* Slightly transparent */
-            transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .carousel-indicators .active {
-            background-color: var(--primary-color); /* Primary color for active dot */
-            opacity: 1;
-            transform: scale(1.2); /* Slightly larger active dot */
-        }
-
-
-        /* --- Section Styling --- */
-        .section {
-            padding: 100px 0;
-        }
-
-        /* White background sections with appropriate text colors */
-        #services, #why-us, #contact, #strategic-focus { /* strategic-focus now has light-grey-bg */
-            background-color: var(--white-bg); 
-            color: var(--dark-section-text-color); /* Darker text for white background */
-        }
-
-        /* Specific background for Core Solutions */
-        #core-solutions {
-            background-color: var(--light-grey-bg);
-            color: var(--dark-section-text-color);
-        }
-        
-        #strategic-focus { /* New Strategic Focus section background */
-            background-color: var(--light-grey-bg); /* Changed to light grey */
-            color: var(--dark-section-text-color);
-        }
-
-        #services .section-title,
-        #why-us .section-title,
-        #contact .section-title,
-        #core-solutions .section-title,
-        #strategic-focus .section-title { /* Strategic Focus section title color */
-            color: var(--dark-section-text-color); /* Darker title for white/light grey background */
-        }
-        
-        #services .section-subtitle,
-        #why-us .section-subtitle,
-        #contact .section-subtitle,
-        #core-solutions .section-subtitle,
-        #strategic-focus .section-subtitle { /* Strategic Focus section subtitle color */
-            color: var(--dark-section-subtitle-color); /* Darker subtitle for white/light grey background */
-        }
-
-
-        #about, #testimonials {
-            background-color: var(--secondary-color); /* Keep these darker */
-            color: var(--text-color); /* Original light text color */
-        }
-
-        .section-title {
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-        
-        .section-subtitle {
-            margin-bottom: 3rem;
-        }
-
-        /* --- Services Section --- */
-        .service-card {
-            background-color: var(--light-secondary-color); /* Cards remain dark */
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            border: 1px solid #1d2d44;
-            transition: all 0.3s ease-in-out;
-            height: 100%;
-            color: var(--text-color); /* Ensure text is light on dark card */
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-            border-color: var(--primary-color);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: #fff; /* Icons on dark cards are white */
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card h3 {
-            color: var(--text-color); /* Light heading on dark card */
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            color: var(--light-text-color); /* Light paragraph on dark card */
-        }
-
-        /* --- About Section --- */
-        .about-img {
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-        }
-
-        /* --- Why Choose Us Section --- */
-        .feature-item {
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            margin-bottom: 2rem;
-        }
-        .feature-icon {
-            font-size: 1.5rem;
-            color: var(--primary-color); /* Icons on white background use primary color */
-            margin-right: 1.5rem;
-            margin-top: 5px;
-        }
-        .feature-item h4 {
-            font-weight: 600;
-            color: var(--dark-section-text-color); /* Dark heading for white background */
-        }
-        .feature-item p {
-            color: var(--dark-section-subtitle-color); /* Dark paragraph for white background */
+            border-left: 1px solid var(--primary-color); /* Border on the LEFT of the sliding menu */
+            overflow-y: auto; /* Allow scrolling for menu content */
         }
 
-        /* --- Core Solutions Section --- */
-        .core-solution-item {
-            background-color: var(--light-secondary-color); /* Cards remain dark */
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #1d2d44;
-            transition: all 0.3s ease;
-            color: var(--text-color); /* Light text for dark card */
+        .navbar-collapse.show {
+            transform: translateX(0); /* When shown, slide to the right edge */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
-        .core-solution-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px -10px rgba(2,12,27,0.7);
-            border-color: var(--primary-color);
+        /* Specific adjustment for very small screens if 70vw is too wide */
+        @media (max-width: 420px) { /* Adjust breakpoint if 70vw is still too large on very small screens */
+            .navbar-collapse {
+                max-width: 100vw; /* Let it take full width on very small screens */
+                transform: translateX(100vw); /* Adjust transform to 100% of its (now full) width, from right */
+            }
+            .navbar-collapse.show {
+                transform: translateX(0);
+            }
         }
 
-        .core-solution-icon {
-            font-size: 2.5rem;
-            color: #fff; /* Icons on dark cards are white */
-            margin-bottom: 1rem;
-        }
-
-        .core-solution-item h4 {
-            font-weight: 600;
-            color: var(--text-color); /* Light heading for dark card */
-            margin-bottom: 0.75rem;
-        }
-
-        .core-solution-item p {
-            color: var(--light-text-color); /* Light paragraph for dark card */
-            font-size: 0.95rem;
-        }
-
-
-        /* --- Testimonials Section --- */
-        .testimonial-card {
-            background-color: var(--light-secondary-color);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--primary-color);
-        }
-        .testimonial-card p {
-            font-style: italic;
-            color: var(--light-text-color);
-        }
-        .testimonial-author {
-            margin-top: 1.5rem;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-        .testimonial-author span {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--primary-color);
-        }
-
-        /* --- Our Strategic Focus Section (NEW) --- */
-        #strategic-focus .strategic-content-wrapper {
-            background-color:  #0a192f; /* Cards on light background are white */
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.1); /* Lighter shadow for light background */
-            border: 1px solid rgba(0,0,0,0.05); /* Very light border */
-            text-align: center;
-            position: relative; /* For animations */
-        }
-
-        #strategic-focus .strategic-icon {
-            font-size: 3.5rem;
-            color: var(--primary-color); /* Icons remain primary color */
-            margin-bottom: 1.5rem;
-            display: block; /* Ensure it's on its own line */
-        }
-
-        #strategic-focus .current-focus-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: white; /* Dark text for light background */
-            margin-bottom: 1rem;
-        }
-
-        #strategic-focus .current-focus-description {
-            font-size: 1.1rem;
-            color: white; /* Dark text for light background */
-            max-width: 800px;
-            margin: 0 auto 2rem auto;
-        }
-
-        #strategic-focus .strategic-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem; /* Space between buttons */
-            margin-top: 2rem;
-        }
-
-        #strategic-focus .btn-focus-nav {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            padding: 0.75rem 2rem;
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        #strategic-focus .btn-focus-nav:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-        }
-        
-        /* Animation classes for content */
-        .content-fade-container {
-            position: relative;
-            min-height: 250px; /* Ensure container has height during transition */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Hide overflow during animation */
-        }
-
-        .strategic-slide-content {
-            position: absolute;
+        /* Mobile Menu Internal Styling */
+        .navbar-nav {
             width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 3rem; /* Match parent padding from strategic-content-wrapper */
-            transition: all 0.7s ease-in-out;
-            opacity: 0;
-            transform: translateY(20px); /* Default for fade-up */
+            margin-top: 1rem;
         }
-
-        /* Specific animation classes */
-        .strategic-slide-content.animate-fade-up {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .strategic-slide-content.animate-fade-left {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-        .strategic-slide-content.animate-fade-down {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        .strategic-slide-content.animate-fade-right {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-
-        .strategic-slide-content.active {
-            opacity: 1;
-            transform: translate(0, 0); /* Reset to normal position */
-        }
-
-        /* Dots indicator styling */
-        #strategic-focus .strategic-dots {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5rem;
-            gap: 10px;
-        }
-
-        #strategic-focus .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.2); /* Darker dots on light background */
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            border: 1px solid rgba(0, 170, 255, 0.5); /* Subtle border */
-        }
-
-        #strategic-focus .dot.active {
-            background-color: var(--primary-color);
-            transform: scale(1.2);
-            border-color: var(--primary-color);
-        }
-
-
-        /* --- Contact Section --- */
-        .contact-info-item {
-            background-color: var(--light-secondary-color); /* Cards remain dark */
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            border: 1px solid #1d2d44;
-            color: var(--text-color); /* Light text for dark card */
-        }
-
-        .contact-info-item i {
-            font-size: 2.5rem;
-            color: #fff; /* Icons on dark cards are white */
+        .nav-item {
+            width: 100%;
             margin-bottom: 1rem;
         }
-
-        .contact-info-item h4 {
-            color: var(--text-color); /* Light heading for dark card */
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        .nav-link {
+            margin: 0;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            width: 100%;
+            transition: color 0.3s ease; /* Only color transition */
+            color: var(--text-color) !important;
         }
-
-        .contact-info-item p {
-            color: var(--light-text-color); /* Light paragraph for dark card */
-            font-size: 1.1rem;
-        }
-
-        .contact-info-item a {
-            color: var(--light-text-color); /* Light link for dark card */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info-item a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Adjust text color for general content in white/light grey sections */
-        #contact p.lead, #contact p.fs-5, #contact p.text-light-text-color {
-            color: var(--dark-section-subtitle-color) !important;
-        }
-        #contact a.text-white {
-            color: var(--dark-section-text-color) !important;
-        }
-        #contact a.text-white:hover {
+        .nav-link:hover, .nav-link.active {
             color: var(--primary-color) !important;
+            /* REMOVED: background-color and border-radius for mobile hover */
         }
+        /* REMOVED: .nav-link::before for mobile links as well */
 
-
-        /* --- Footer --- */
-        footer {
-            background-color: #0a1421;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        footer a {
-            transition: color 0.3s ease;
-        }
-        footer a:hover {
-            color: var(--primary-color) !important; /* !important to override Bootstrap if necessary */
-        }
-        .footer-socials a {
-            color: #fff; /* Footer social icons are white */
+        /* Mobile Navbar Logo inside the expanded menu (if you keep it) */
+        .navbar-brand-mobile {
+            font-weight: 700;
+            color: #ffffff !important;
             font-size: 1.5rem;
-            margin: 0 0.8rem;
-            transition: transform 0.3s ease, color 0.3s ease; /* Add transition for hover */
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align to start for left-aligned menu items */
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--primary-color);
+            margin-bottom: 1rem;
+            width: 100%;
         }
-        .footer-socials a:hover {
-            transform: scale(1.1); /* Scale up on hover */
-            color: var(--primary-color) !important; /* Change color on hover */
+        .navbar-brand-mobile img {
+            height: 30px;
+            margin-right: 10px;
         }
-    </style>
+        .navbar-brand-mobile .fa-shield-halved {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .about-img {
+            max-height: 350px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    /* Overlay for when mobile menu is open */
+    .navbar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1050;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .navbar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* --- Hero Section with Carousel and Globe --- */
+    #hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden; /* Important for containing globe if it tries to overflow */
+        background-color: var(--secondary-color);
+    }
+
+    #globe-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Behind carousel content */
+        overflow: hidden; /* Ensure globe itself doesn't overflow */
+    }
+
+    #globe-container canvas {
+        display: block;
+    }
+
+    /* Carousel setup for correct layering */
+    #hero .carousel-inner {
+        position: absolute; /* Take carousel out of flow, layer on top of globe */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; /* Above the globe */
+    }
+
+    /* Custom "zoom-out-fade" animation for carousel slides */
+    .carousel-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+        z-index: 1;
+        display: block !important;
+        transform: scale(0.9); /* Start slightly zoomed out */
+    }
+
+    .carousel-item.active {
+        opacity: 1;
+        transform: scale(1); /* Zoom to normal size */
+        z-index: 2;
+    }
+
+    /* When an item leaves (goes inactive) */
+    .carousel-item-next:not(.carousel-item-start),
+    .carousel-item-prev:not(.carousel-item-end),
+    .carousel-item.active.carousel-item-start,
+    .carousel-item.active.carousel-item-end {
+        /* These states are for Bootstrap's default slide. We override them. */
+        transform: scale(1); /* Ensure active item doesn't get transformed by Bootstrap */
+    }
+
+    /* For the incoming slide, make it start slightly zoomed out and hidden */
+    .carousel-item-next, .carousel-item-prev {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    /* Reset for the currently active item when it's about to become inactive */
+    .carousel-item.active {
+        transform: scale(1);
+        opacity: 1;
+    }
+    
+    /* When an active item starts its exit animation (becomes .carousel-item-start or .carousel-item-end) */
+    .carousel-item.active.carousel-item-start,
+    .carousel-item.active.carousel-item-end {
+        transform: scale(0.9); /* Zoom out */
+        opacity: 0;
+        z-index: 1; /* Move behind incoming slide */
+    }
+    /* End custom "zoom-out-fade" animation */
+
+
+    .carousel-caption {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.048); /* Overlay for readability */
+        display: flex;
+        align-items: center; /* Vertically center */
+        justify-content: center; /* Horizontally center */
+        text-align: center;
+        padding: 2rem;
+        width: 100%; /* Ensure it spans full width */
+        height: 100%; /* Ensure it spans full height */
+    }
+
+    .hero-content {
+        position: relative;
+        padding: 2rem;
+        color: #fff; /* Text color */
+        max-width: 900px; /* Limit width for better readability */
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+    }
+
+    .hero-content p {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        color: var(--light-text-color);
+        max-width: 700px;
+        margin: 1rem auto;
+    }
+
+    /* Carousel Indicators as Dots */
+    .carousel-indicators [data-bs-target] {
+        width: 10px; /* Width for dots */
+        height: 10px; /* Height for dots */
+        border-radius: 50%; /* Make them perfectly round */
+        background-color: rgba(255, 255, 255, 0.7); /* Lighter background for inactive dots */
+        border: none; /* Remove border */
+        opacity: 0.7; /* Slightly transparent */
+        transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .carousel-indicators .active {
+        background-color: var(--primary-color); /* Primary color for active dot */
+        opacity: 1;
+        transform: scale(1.2); /* Slightly larger active dot */
+    }
+
+
+    /* --- Section Styling --- */
+    .section {
+        padding: 100px 0; /* Consistent padding for all sections */
+    }
+
+    /* White background sections with appropriate text colors */
+    #services, #why-us, #contact, #strategic-focus {
+        background-color: var(--white-bg);
+        color: var(--dark-section-text-color); /* Darker text for white background */
+    }
+
+    /* Specific background for Core Solutions */
+    #core-solutions {
+        background-color: var(--light-grey-bg);
+        color: var(--dark-section-text-color);
+    }
+    
+    #strategic-focus {
+        background-color: var(--light-grey-bg); /* Changed to light grey */
+        color: var(--dark-section-text-color);
+    }
+
+    #services .section-title,
+    #why-us .section-title,
+    #contact .section-title,
+    #core-solutions .section-title,
+    #strategic-focus .section-title {
+        color: var(--dark-section-text-color); /* Darker title for white/light grey background */
+    }
+    
+    #services .section-subtitle,
+    #why-us .section-subtitle,
+    #contact .section-subtitle,
+    #core-solutions .section-subtitle,
+    #strategic-focus .section-subtitle {
+        color: var(--dark-section-subtitle-color); /* Darker subtitle for white/light grey background */
+    }
+
+
+    #about, #testimonials {
+        background-color: var(--secondary-color); /* Keep these darker */
+        color: var(--text-color); /* Original light text color */
+    }
+
+    .section-title {
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50%;
+        height: 3px;
+        background-color: var(--primary-color);
+    }
+    
+    .section-subtitle {
+        margin-bottom: 3rem;
+    }
+
+    /* --- Services Section --- */
+    .service-card {
+        background-color: var(--light-secondary-color); /* Cards remain dark */
+        padding: 2.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid #1d2d44;
+        transition: all 0.3s ease-in-out;
+        height: 100%;
+        color: var(--text-color); /* Ensure text is light on dark card */
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+        border-color: var(--primary-color);
+    }
+
+    .service-icon {
+        font-size: 3rem;
+        color: #fff; /* Icons on dark cards are white */
+        margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+        color: var(--text-color); /* Light heading on dark card */
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .service-card p {
+        color: var(--light-text-color); /* Light paragraph on dark card */
+    }
+
+    /* --- About Section --- */
+    .about-img {
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+    }
+
+    /* --- Why Choose Us Section --- */
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+    }
+    .feature-icon {
+        font-size: 1.5rem;
+        color: var(--primary-color); /* Icons on white background use primary color */
+        margin-right: 1.5rem;
+        margin-top: 5px;
+    }
+    .feature-item h4 {
+        font-weight: 600;
+        color: var(--dark-section-text-color); /* Dark heading for white background */
+    }
+    .feature-item p {
+        color: var(--dark-section-subtitle-color); /* Dark paragraph for white background */
+    }
+
+    /* --- Core Solutions Section --- */
+    .core-solution-item {
+        background-color: var(--light-secondary-color); /* Cards remain dark */
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #1d2d44;
+        transition: all 0.3s ease;
+        color: var(--text-color); /* Light text for dark card */
+    }
+
+    .core-solution-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px -10px rgba(2,12,27,0.7);
+        border-color: var(--primary-color);
+    }
+
+    .core-solution-icon {
+        font-size: 2.5rem;
+        color: #fff; /* Icons on dark cards are white */
+        margin-bottom: 1rem;
+    }
+
+    .core-solution-item h4 {
+        font-weight: 600;
+        color: var(--text-color); /* Light heading for dark card */
+        margin-bottom: 0.75rem;
+    }
+
+    .core-solution-item p {
+        color: var(--light-text-color); /* Light paragraph for dark card */
+        font-size: 0.95rem;
+    }
+
+
+    /* --- Testimonials Section --- */
+    .testimonial-card {
+        background-color: var(--light-secondary-color);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        border-left: 5px solid var(--primary-color);
+    }
+    .testimonial-card p {
+        font-style: italic;
+        color: var(--light-text-color);
+    }
+    .testimonial-author {
+        margin-top: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .testimonial-author span {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--primary-color);
+    }
+
+    /* --- Our Strategic Focus Section (NEW) --- */
+    #strategic-focus .strategic-content-wrapper {
+        background-color:  #0a192f; /* Cards on light background are white */
+        padding: 3rem;
+        border-radius: var(--border-radius);
+        box-shadow: 0 10px 30px -15px rgba(0,0,0,0.1); /* Lighter shadow for light background */
+        border: 1px solid rgba(0,0,0,0.05); /* Very light border */
+        text-align: center;
+        position: relative; /* For animations */
+    }
+
+    #strategic-focus .strategic-icon {
+        font-size: 3.5rem;
+        color: var(--primary-color); /* Icons remain primary color */
+        margin-bottom: 1.5rem;
+        display: block; /* Ensure it's on its own line */
+    }
+
+    #strategic-focus .current-focus-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white; /* Dark text for light background */
+        margin-bottom: 1rem;
+    }
+
+    #strategic-focus .current-focus-description {
+        font-size: 1.1rem;
+        color: white; /* Dark text for light background */
+        max-width: 800px;
+        margin: 0 auto 2rem auto;
+    }
+
+    #strategic-focus .strategic-controls {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem; /* Space between buttons */
+        margin-top: 2rem;
+    }
+
+    #strategic-focus .btn-focus-nav {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 0.75rem 2rem;
+        border-radius: var(--border-radius);
+        transition: all 0.3s ease;
+        font-weight: 600;
+    }
+
+    #strategic-focus .btn-focus-nav:hover {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+    }
+    
+    /* Animation classes for content */
+    .content-fade-container {
+        position: relative;
+        /* Increased min-height significantly */
+        min-height: 400px; /* Increased to allow more room for content */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Ensure overflow-y is auto if content might still exceed height */
+        overflow-y: auto; /* Allow vertical scrolling if content is too long */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    .strategic-slide-content {
+        position: absolute;
+        width: 100%;
+        /* Set height to auto to allow content to dictate height */
+        height: auto; /* Let content define height */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 3rem; /* Match parent padding from strategic-content-wrapper */
+        transition: all 0.7s ease-in-out;
+        opacity: 0;
+        transform: translateY(20px); /* Default for fade-up */
+        /* Ensure inner content doesn't overflow */
+        box-sizing: border-box; /* Include padding in width/height calculation */
+    }
+
+    /* Specific animation classes */
+    .strategic-slide-content.animate-fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    .strategic-slide-content.animate-fade-left {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    .strategic-slide-content.animate-fade-down {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    .strategic-slide-content.animate-fade-right {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    .strategic-slide-content.active {
+        opacity: 1;
+        transform: translate(0, 0); /* Reset to normal position */
+    }
+
+    /* Dots indicator styling */
+    #strategic-focus .strategic-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+        gap: 10px;
+    }
+
+    #strategic-focus .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.2); /* Darker dots on light background */
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 1px solid rgba(0, 170, 255, 0.5); /* Subtle border */
+    }
+
+    #strategic-focus .dot.active {
+        background-color: var(--primary-color);
+        transform: scale(1.2);
+        border-color: var(--primary-color);
+    }
+
+
+    /* --- Contact Section --- */
+    .contact-info-item {
+        background-color: var(--light-secondary-color); /* Cards remain dark */
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        border: 1px solid #1d2d44;
+        color: var(--text-color); /* Light text for dark card */
+    }
+
+    .contact-info-item i {
+        font-size: 2.5rem;
+        color: #fff; /* Icons on dark cards are white */
+        margin-bottom: 1rem;
+    }
+
+    .contact-info-item h4 {
+        color: var(--text-color); /* Light heading for dark card */
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info-item p {
+        color: var(--light-text-color); /* Light paragraph for dark card */
+        font-size: 1.1rem;
+    }
+
+    .contact-info-item a {
+        color: var(--light-text-color); /* Light link for dark card */
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-info-item a:hover {
+        color: var(--primary-color);
+    }
+
+    /* Adjust text color for general content in white/light grey sections */
+    #contact p.lead, #contact p.fs-5, #contact p.text-light-text-color {
+        color: var(--dark-section-subtitle-color) !important;
+    }
+    #contact a.text-white {
+        color: var(--dark-section-text-color) !important;
+    }
+    #contact a.text-white:hover {
+        color: var(--primary-color) !important;
+    }
+
+
+    /* --- Footer --- */
+    footer {
+        background-color: #0a1421;
+        padding: 3rem 0;
+        text-align: center;
+    }
+    footer a {
+        transition: color 0.3s ease;
+    }
+    footer a:hover {
+        color: var(--primary-color) !important; /* !important to override Bootstrap if necessary */
+    }
+    .footer-socials a {
+        color: #fff; /* Footer social icons are white */
+        font-size: 1.5rem;
+        margin: 0 0.8rem;
+        transition: transform 0.3s ease, color 0.3s ease; /* Add transition for hover */
+    }
+    .footer-socials a:hover {
+        transform: scale(1.1); /* Scale up on hover */
+        color: var(--primary-color) !important; /* Change color on hover */
+    }
+</style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
 
@@ -827,9 +862,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <!-- Mobile Logo - This will only be visible when the navbar is expanded on mobile -->
-                <div class="d-lg-none text-center py-3 mb-3 border-bottom border-primary">
+                <div class="d-lg-none text-center py-3 mb-3  border-primary">
                     <a class="navbar-brand-mobile" href="#">
-                      <img src="./WhatsApp Image 2025-07-08 at 04.05.47_e8c33f43.jpg" alt="">
+                       <i class="fa-solid fa-shield-halved"></i> Hanniel LLC
                     </a>
                 </div>
                 <ul class="navbar-nav ms-auto">
@@ -1107,34 +1142,29 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
+         <section id="contact" class="section">
         <div class="container">
             <div class="text-center" data-aos="fade-up">
                 <h2 class="section-title">Strengthen Your Defenses</h2>
                 <p class="section-subtitle">Let's discuss how we can tailor a security strategy for you. Reach out for a confidential consultation.</p>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-8" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="text-center">
-                        <p class="lead">Ready to elevate your security posture? Contact us directly:</p>
-                        <div class="my-4">
-                            <h4><i class="fa-solid fa-envelope me-2 text-primary"></i> Email Us:</h4>
-                            <button id="emailButton" class="btn btn-primary btn-lg mt-2">
-                                <i class="fa-solid fa-envelope me-2"></i> donaldayodeji6@gmail.com
-                            </button>
-                        </div>
-                        <div class="my-4">
-                            <h4><i class="fa-solid fa-phone me-2 text-primary"></i> Call Us:</h4>
-                            <p class="fs-5"><a href="tel:+1234567890" class="text-dark-section-text-color text-decoration-none">+1 (234) 567-890</a></p>
-                        </div>
-                        <p class="text-dark-section-subtitle-color">Our team is available to answer your questions and provide expert guidance.</p>
+                <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <p class="lead text-black-text-color mb-4">
+                        Ready to enhance your cybersecurity posture? We're here to help.
+                    </p>
+                    <div class="mb-4">
+                        <p class="h4 text-black"><i class="fa-solid fa-phone-alt text-primary me-2"></i> Call Us: +1 (240) 883-2416</p>
                     </div>
+                    <a href="mailto:donaldayodeji6@gmail.com?subject=Inquiry%20from%20Website" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-envelope me-2"></i> Send Us an Email
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
+  
     <!-- Footer -->
     <footer>
         <div class="container">
