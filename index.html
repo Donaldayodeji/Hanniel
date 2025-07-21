@@ -491,9 +491,9 @@
     }
 
 
-    #about, #testimonials {
-        background-color: var(--secondary-color); /* Keep these darker */
-        color: var(--text-color); /* Original light text color */
+    #about {
+        background-color: whitesmoke; /* Keep these darker */
+        color: black; /* Original light text color */
     }
 
     .section-title {
@@ -640,59 +640,7 @@
         color: var(--primary-color);
     }
 
-    /* --- Our Strategic Focus Section (NEW) --- */
-    #strategic-focus .strategic-content-wrapper {
-        background-color:  #0a192f; /* Cards on light background are white */
-        padding: 3rem;
-        border-radius: var(--border-radius);
-        box-shadow: 0 10px 30px -15px rgba(0,0,0,0.1); /* Lighter shadow for light background */
-        border: 1px solid rgba(0,0,0,0.05); /* Very light border */
-        text-align: center;
-        position: relative; /* For animations */
-    }
-
-    #strategic-focus .strategic-icon {
-        font-size: 3.5rem;
-        color: var(--primary-color); /* Icons remain primary color */
-        margin-bottom: 1.5rem;
-        display: block; /* Ensure it's on its own line */
-    }
-
-    #strategic-focus .current-focus-title {
-        font-size: 2rem;
-        font-weight: 700;
-        color: white; /* Dark text for light background */
-        margin-bottom: 1rem;
-    }
-
-    #strategic-focus .current-focus-description {
-        font-size: 1.1rem;
-        color: white; /* Dark text for light background */
-        max-width: 800px;
-        margin: 0 auto 2rem auto;
-    }
-
-    #strategic-focus .strategic-controls {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem; /* Space between buttons */
-        margin-top: 2rem;
-    }
-
-    #strategic-focus .btn-focus-nav {
-        background-color: transparent;
-        color: var(--primary-color);
-        border: 1px solid var(--primary-color);
-        padding: 0.75rem 2rem;
-        border-radius: var(--border-radius);
-        transition: all 0.3s ease;
-        font-weight: 600;
-    }
-
-    #strategic-focus .btn-focus-nav:hover {
-        background-color: var(--primary-color);
-        color: var(--secondary-color);
-    }
+   
     
     /* Animation classes for content */
     .content-fade-container {
@@ -871,18 +819,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#hero">Home</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#services">Services</a>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#core-solutions">Core Solutions</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#strategic-focus">Our Focus</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About Us</a>
-                    </li>
+                 
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#why-us">Why Choose Us</a>
                     </li>
@@ -936,8 +884,29 @@
         </div>
     </section>
 
+
+
+    <!-- About Us Section -->
+    <section id="about" class="section" style="background-color: white;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <img src="./WhatsApp Image 2025-07-08 at 04.05.47_e8c33f43.jpg" class="img-fluid about-img" alt="Hanniel LLC Team">
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                    <h2 class="section-title">Pioneers in Digital Defense</h2>
+                    <p class="text-primary fw-bold">We are a team of elite cybersecurity experts, former intelligence analysts, and dedicated engineers.</p>
+                    <p class="text-light-text-color">Founded on the principle that true security requires a proactive and adaptive approach, Hanniel LLC has been at the forefront of digital protection for over a decade. We combine cutting-edge technology with deep human expertise to deliver security solutions that are not just robust, but also intelligent and tailored to your unique operational landscape.</p>
+            
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <!-- Services Section -->
-    <section id="services" class="section">
+    <section id="services" class="section" style="background-color: rgba(245, 245, 245, 0.938);">
         <div class="container">
             <div class="text-center" data-aos="fade-down">
                 <h2 class="section-title">Our Security Services</h2>
@@ -962,7 +931,7 @@
                     <div class="service-card">
                         <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
                         <h3>24/7 Managed SOC</h3>
-                        <p>Round-the-clock monitoring, detection, and response from our state-of-the-art Security Operations Center (SOC).</p>
+                        <p>Round-the-clock monitoring, detection, and response from our formidable team.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
@@ -991,7 +960,7 @@
     </section>
 
     <!-- Our Core Solutions Section -->
-    <section id="core-solutions" class="section">
+    <section id="core-solutions" class="section" style="background-color: white;">
         <div class="container">
             <div class="text-center" data-aos="fade-up">
                 <h2 class="section-title">Our Core Solutions</h2>
@@ -1030,52 +999,10 @@
         </div>
     </section>
 
-    <!-- Our Strategic Focus Section (NEW) -->
-    <section id="strategic-focus" class="section">
-        <div class="container">
-            <div class="text-center" data-aos="fade-down">
-                <h2 class="section-title">Our Strategic Focus</h2>
-                <p class="section-subtitle">Driving innovation in cybersecurity to meet tomorrow's challenges, today.</p>
-            </div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="strategic-content-wrapper" data-aos="fade-up" data-aos-delay="200">
-                        <div id="focusContent" class="content-fade-container">
-                            <!-- Dynamic content will be injected here -->
-                        </div>
-                        <div class="strategic-controls">
-                            <button id="prevFocus" class="btn btn-focus-nav"><i class="fas fa-chevron-left me-2"></i> Previous</button>
-                            <button id="nextFocus" class="btn btn-focus-nav">Next <i class="fas fa-chevron-right ms-2"></i></button>
-                        </div>
-                    </div>
-                     <div id="strategic-dots" class="strategic-dots">
-                        <!-- Dots will be dynamically added here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                    <img src="./WhatsApp Image 2025-07-08 at 04.05.47_e8c33f43.jpg" class="img-fluid about-img" alt="Hanniel LLC Team">
-                </div>
-                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
-                    <h2 class="section-title">Pioneers in Digital Defense</h2>
-                    <p class="text-primary fw-bold">We are a team of elite cybersecurity experts, former intelligence analysts, and dedicated engineers.</p>
-                    <p class="text-light-text-color">Founded on the principle that true security requires a proactive and adaptive approach, Hanniel LLC has been at the forefront of digital protection for over a decade. We combine cutting-edge technology with deep human expertise to deliver security solutions that are not just robust, but also intelligent and tailored to your unique operational landscape.</p>
-                    <a href="#contact" class="btn btn-primary mt-3">Meet the Team</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Why Choose Us Section -->
-    <section id="why-us" class="section">
+    <section id="why-us" class="section" style="background-color: #F8F9FA;">
         <div class="container">
             <div class="text-center" data-aos="fade-up">
                 <h2 class="section-title">The Hanniel LLC Advantage</h2>
@@ -1125,7 +1052,7 @@
                         <p>"Hanniel LLC's managed SOC has been a game-changer for us. Their team is incredibly responsive and their expertise has given us a level of security we couldn't achieve on our own. I can finally sleep at night."</p>
                         <div class="testimonial-author">
                             Jane Doe
-                            <span>CTO, FinTech Innovators</span>
+                          
                         </div>
                     </div>
                 </div>
@@ -1134,18 +1061,18 @@
                         <p>"The penetration test they conducted was thorough and eye-opening. They didn't just give us a list of problems; they provided a clear roadmap for remediation and worked with our dev team to fix the critical issues."</p>
                         <div class="testimonial-author">
                             John Smith
-                            <span>Head of Engineering, HealthData Corp</span>
+                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+<!-- Contact -->
          <section id="contact" class="section">
         <div class="container">
             <div class="text-center" data-aos="fade-up">
-                <h2 class="section-title">Strengthen Your Defenses</h2>
+                <h2 class="section-title">Connect with us</h2>
                 <p class="section-subtitle">Let's discuss how we can tailor a security strategy for you. Reach out for a confidential consultation.</p>
             </div>
             <div class="row justify-content-center">
@@ -1153,10 +1080,8 @@
                     <p class="lead text-black-text-color mb-4">
                         Ready to enhance your cybersecurity posture? We're here to help.
                     </p>
-                    <div class="mb-4">
-                        <p class="h4 text-black"><i class="fa-solid fa-phone-alt text-primary me-2"></i> Call Us: +1 (240) 883-2416</p>
-                    </div>
-                    <a href="mailto:donaldayodeji6@gmail.com?subject=Inquiry%20from%20Website" class="btn btn-primary btn-lg">
+                  
+                    <a href="mailto:info@hannielsllc.com?subject=Inquiry%20from%20Website" class="btn btn-primary btn-lg">
                         <i class="fa-solid fa-envelope me-2"></i> Send Us an Email
                     </a>
                 </div>
@@ -1177,18 +1102,19 @@
                     <h5 class="text-white mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="#hero" class="text-light-text-color text-decoration-none py-1 d-block">Home</a></li>
+                        <li><a href="#about" class="text-light-text-color text-decoration-none py-1 d-block">About Us</a></li>
                         <li><a href="#services" class="text-light-text-color text-decoration-none py-1 d-block">Services</a></li>
                         <li><a href="#core-solutions" class="text-light-text-color text-decoration-none py-1 d-block">Core Solutions</a></li>
-                        <li><a href="#strategic-focus" class="text-light-text-color text-decoration-none py-1 d-block">Our Focus</a></li>
-                        <li><a href="#about" class="text-light-text-color text-decoration-none py-1 d-block">About Us</a></li>
+                  
+                        <li><a href="#why-us" class="text-light-text-color text-decoration-none py-1 d-block">Why choose us</a></li>
                         <li><a href="#contact" class="text-light-text-color text-decoration-none py-1 d-block">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
                     <h5 class="text-white mb-3">Contact Us</h5>
-                    <p class="text-light-text-color mb-1"><i class="fas fa-map-marker-alt me-2"></i> 123 Cyber Way, Akure, Nigeria</p>
+                    <p class="text-light-text-color mb-1"><i class="fas fa-map-marker-alt me-2"></i>    Gen. Lafayette Blvd Brandywine</p>
                     <p class="text-light-text-color mb-1"><i class="fas fa-phone-alt me-2"></i> <a href="tel:+1234567890" class="text-light-text-color text-decoration-none">+1 (234) 567-890</a></p>
-                    <p class="text-light-text-color mb-1"><i class="fas fa-envelope me-2"></i> <a href="mailto:info@hanniel.com" class="text-light-text-color text-decoration-none">info@hanniel.com</a></p>
+                    <p class="text-light-text-color mb-1"><i class="fas fa-envelope me-2"></i> <a href="mailto:info@hannielsllc.com" class="text-light-text-color text-decoration-none">info@hanniel.com</a></p>
                 </div>
                 <div class="col-md-3" data-aos="fade-left" data-aos-delay="300">
                     <h5 class="text-white mb-3">Follow Us</h5>
